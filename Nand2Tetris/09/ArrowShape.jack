@@ -1,0 +1,133 @@
+class ArrowShape {
+
+   field int x, y;
+   field int width, height;
+   field int speed;
+   field boolean isActive;
+
+   constructor ArrowShape new(int Ax, int Aspeed) {
+      let x = Ax; 
+      let y = 0;
+      let width = 16;
+      let height = 16;
+      let speed = Aspeed;
+      let isActive = true;
+      do draw();
+      return this;
+   }
+
+   method void dispose() {
+      do Memory.deAlloc(this);
+      return;
+   }
+   
+   method int getX() {
+      return x; 
+   }
+   method int getY() {
+      return y;
+   }
+   method int getWidth() { 
+      return width;
+   }
+   method int getHeight() {
+      return height; 
+   }
+   method boolean isAlive() { 
+      return isActive; 
+   }
+
+   
+   method void draw() {
+      var int memAddress;
+      var int location;
+      
+      let location = (y * 32) + (x / 16); 
+      let memAddress = 16384 + location;
+
+      do Memory.poke(memAddress+0, -3697);
+      do Memory.poke(memAddress+32, -13933);
+      do Memory.poke(memAddress+64, -23131);
+      do Memory.poke(memAddress+96, -27703);
+      do Memory.poke(memAddress+128, -13933);
+      do Memory.poke(memAddress+160, -23515);
+      do Memory.poke(memAddress+192, -28087);
+      do Memory.poke(memAddress+224, -13933);
+      do Memory.poke(memAddress+256, -23515);
+      do Memory.poke(memAddress+288, -28087);
+      do Memory.poke(memAddress+320, -30319);
+      do Memory.poke(memAddress+352, -31711);
+      do Memory.poke(memAddress+384, -32191);
+      do Memory.poke(memAddress+416, -32383);
+      do Memory.poke(memAddress+448, -32767);
+      do Memory.poke(memAddress+480, -1);
+
+      return;
+   }
+
+   method void erase() {
+      var int memAddress;
+      var int location;
+      
+      let location = (y * 32) + (x / 16); 
+      let memAddress = 16384 + location;
+
+      do Memory.poke(memAddress+0, 0);
+      do Memory.poke(memAddress+32, 0);
+      do Memory.poke(memAddress+64, 0);
+      do Memory.poke(memAddress+96, 0);
+      do Memory.poke(memAddress+128, 0);
+      do Memory.poke(memAddress+160, 0);
+      do Memory.poke(memAddress+192, 0);
+      do Memory.poke(memAddress+224, 0);
+      do Memory.poke(memAddress+256, 0);
+      do Memory.poke(memAddress+288, 0);
+      do Memory.poke(memAddress+320, 0);
+      do Memory.poke(memAddress+352, 0);
+      do Memory.poke(memAddress+384, 0);
+      do Memory.poke(memAddress+416, 0);
+      do Memory.poke(memAddress+448, 0);
+      do Memory.poke(memAddress+480, 0);
+
+      return;
+   }
+   
+   method void fall() {
+      if (y < 230) { 
+        do erase(); 
+      }
+      let y = y + speed;
+
+      if (y > 256) {
+          let isActive = false;
+      }
+      
+      
+      if (isActive) {
+          if (y < 230) { 
+            do draw();
+        }
+      }
+      return;
+   }
+   
+   method boolean checkCollision(Player player) {
+       var int pX, pY;
+       var int sX, sY;
+       var int size;
+      var boolean x_overlap;
+      var boolean y_overlap;
+       let pX = player.getX();
+       let pY = player.getY();
+       let sX = x;
+       let sY = y;
+       let size = 16;        
+       let x_overlap = (pX < (sX + size)) & ((pX + size) > sX);       
+       let y_overlap = (pY < (sY + size)) & ((pY + size) > sY);
+       if (y_overlap) {
+           return x_overlap & y_overlap;
+       }
+       
+       return false;
+   }
+}

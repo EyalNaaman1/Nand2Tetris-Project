@@ -1,0 +1,208 @@
+class GameManger {
+field Player player;
+field Array shapes;
+field int maxShapes;
+field int score;
+field boolean isGameOver;
+field int currentShapeIndex;
+
+constructor GameManger new() {
+do Screen.clearScreen(); 
+let player = Player.new(250, 240);
+
+let maxShapes = 5;
+let shapes = Array.new(maxShapes);
+let currentShapeIndex = 0;
+
+let score = 0;
+let isGameOver = false;
+do spawnShape();
+
+return this;
+}
+
+
+method void dispose() {
+    do shapes.dispose();
+    do player.dispose();
+    do Memory.deAlloc(this);
+    return;
+}
+
+/*handles the creation of a shape with higher speed*/
+method void spawnShape() {
+    var int newX;
+    var int speed;
+    
+    let speed = 4 + Math.divide(score, 2);
+    let newX = player.getX();
+
+    if (score>19 & score<30){
+        let shapes[4] = SwordShape.new(newX, speed);
+        let currentShapeIndex = 4;
+        }
+    if (score>14 & score<20){
+        let shapes[3] = ArrowShape.new(newX, speed);
+        let currentShapeIndex = 3;
+        }
+    if (score>9 & score<15){
+        let shapes[2] = MonsterShape.new(newX, speed);
+        let currentShapeIndex = 2;
+        }
+    if (score>4 & score<10){
+        let shapes[1] = BoxShape.new(newX, speed);
+        let currentShapeIndex = 1;
+        }
+    if (score<5){
+        let shapes[0] = XShape.new(newX, speed);
+        let currentShapeIndex = 0;
+    }
+    return;
+}
+
+
+method void handleInput() {
+    var char key;
+    let key = Keyboard.keyPressed();
+
+    if (key = 130) { 
+    do player.moveLeft();
+    }
+    if (key = 132) { 
+    do player.moveRight();
+    }
+    
+    if (key = 81) { 
+    let isGameOver = true;
+    } // Q key 
+    return;
+}
+
+/* updates the game status - points and player hit*/
+method void updateGame() {
+    var ArrowShape arrowShape;
+    var MonsterShape monsterShape;
+    var BoxShape boxShape;
+    var XShape xShape;
+    var SwordShape swordShape;
+
+    if (score = 30){
+                let isGameOver = true;
+                return;
+            }
+
+    if (currentShapeIndex=0){
+        let xShape = shapes[0];
+
+        if (~(xShape = null)) {
+
+            do xShape.fall();
+            if (xShape.checkCollision(player)) {
+                let isGameOver = true;
+                return;
+            }
+            if (~xShape.isAlive()) {
+                do xShape.dispose();
+                let score = score + 1;
+
+                do spawnShape();
+            }
+        }
+    }
+
+    if (currentShapeIndex=1){
+        let boxShape = shapes[1];
+
+        if (~(boxShape = null)) {
+
+            do boxShape.fall();
+            if (boxShape.checkCollision(player)) {
+                let isGameOver = true;
+                return;
+            }
+            if (~boxShape.isAlive()) {
+                do boxShape.dispose();
+                let score = score + 1;
+
+                do spawnShape();
+            }
+        }
+    }
+
+    if (currentShapeIndex=2){
+        let monsterShape = shapes[2];
+
+        if (~(monsterShape = null)) {
+
+            do monsterShape.fall();
+            if (monsterShape.checkCollision(player)) {
+                let isGameOver = true;
+                return;
+            }
+            if (~monsterShape.isAlive()) {
+                do monsterShape.dispose();
+                let score = score + 1;
+
+                do spawnShape();
+            }
+        }
+    }
+
+    if (currentShapeIndex=3){
+        let arrowShape = shapes[3];
+
+        if (~(arrowShape = null)) {
+
+            do arrowShape.fall();
+            if (arrowShape.checkCollision(player)) {
+                let isGameOver = true;
+                return;
+            }
+            if (~arrowShape.isAlive()) {
+                do arrowShape.dispose();
+                let score = score + 1;
+
+                do spawnShape();
+            }
+        }
+    }
+    
+    if (currentShapeIndex=4){
+        let swordShape = shapes[4];
+
+        if (~(swordShape = null)) {
+
+            do swordShape.fall();
+            if (swordShape.checkCollision(player)) {
+                let isGameOver = true;
+                return;
+            }
+            if (~swordShape.isAlive()) {
+                do swordShape.dispose();
+                let score = score + 1;
+
+                do spawnShape();
+            }
+        }
+    }
+
+    do Output.moveCursor(0, 0); 
+    do Output.printString("Score: ");
+    do Output.printInt(score);
+    return;
+}
+
+method void run() {
+    while (~isGameOver) {
+        do handleInput();
+        do updateGame();
+
+        do Sys.wait(30); 
+    }
+    
+    do Output.moveCursor(10, 20);
+    do Output.printString("GAME OVER!");
+    do Sys.wait(3000);
+    return;
+}
+}
