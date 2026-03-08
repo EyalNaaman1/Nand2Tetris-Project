@@ -1,0 +1,374 @@
+function MonsterShape.new 0
+push constant 6
+call Memory.alloc 1
+pop pointer 0
+push argument 0
+pop this 0
+push constant 0
+pop this 1
+push constant 16
+pop this 2
+push constant 16
+pop this 3
+push argument 1
+pop this 4
+push constant 0
+not
+pop this 5
+push pointer 0
+call MonsterShape.draw 1
+pop temp 0
+push pointer 0
+return
+function MonsterShape.dispose 0
+push argument 0
+pop pointer 0
+push pointer 0
+call Memory.deAlloc 1
+pop temp 0
+push constant 0
+return
+function MonsterShape.getX 0
+push argument 0
+pop pointer 0
+push this 0
+return
+function MonsterShape.getY 0
+push argument 0
+pop pointer 0
+push this 1
+return
+function MonsterShape.getWidth 0
+push argument 0
+pop pointer 0
+push this 2
+return
+function MonsterShape.getHeight 0
+push argument 0
+pop pointer 0
+push this 3
+return
+function MonsterShape.isAlive 0
+push argument 0
+pop pointer 0
+push this 5
+return
+function MonsterShape.draw 2
+push argument 0
+pop pointer 0
+push this 1
+push constant 32
+call Math.multiply 2
+push this 0
+push constant 16
+call Math.divide 2
+add
+pop local 1
+push constant 16384
+push local 1
+add
+pop local 0
+push local 0
+push constant 0
+add
+push constant 8184
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 32
+add
+push constant 8196
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 64
+add
+push constant 11316
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 96
+add
+push constant 19506
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 128
+add
+push constant 16770
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 160
+add
+push constant 16962
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 192
+add
+push constant 17442
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 224
+add
+push constant 18450
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 256
+add
+push constant 20490
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 288
+add
+push constant 26598
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 320
+add
+push constant 18450
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 352
+add
+push constant 10212
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 384
+add
+push constant 4104
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 416
+add
+push constant 4080
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 448
+add
+push constant 0
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 480
+add
+push constant 0
+call Memory.poke 2
+pop temp 0
+push constant 0
+return
+function MonsterShape.erase 2
+push argument 0
+pop pointer 0
+push this 1
+push constant 32
+call Math.multiply 2
+push this 0
+push constant 16
+call Math.divide 2
+add
+pop local 1
+push constant 16384
+push local 1
+add
+pop local 0
+push local 0
+push constant 0
+add
+push constant 0
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 32
+add
+push constant 0
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 64
+add
+push constant 0
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 96
+add
+push constant 0
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 128
+add
+push constant 0
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 160
+add
+push constant 0
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 192
+add
+push constant 0
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 224
+add
+push constant 0
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 256
+add
+push constant 0
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 288
+add
+push constant 0
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 320
+add
+push constant 0
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 352
+add
+push constant 0
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 384
+add
+push constant 0
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 416
+add
+push constant 0
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 448
+add
+push constant 0
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 480
+add
+push constant 0
+call Memory.poke 2
+pop temp 0
+push constant 0
+return
+function MonsterShape.fall 0
+push argument 0
+pop pointer 0
+push this 1
+push constant 230
+lt
+if-goto IF_TRUE0
+goto IF_FALSE0
+label IF_TRUE0
+push pointer 0
+call MonsterShape.erase 1
+pop temp 0
+label IF_FALSE0
+push this 1
+push this 4
+add
+pop this 1
+push this 1
+push constant 256
+gt
+if-goto IF_TRUE1
+goto IF_FALSE1
+label IF_TRUE1
+push constant 0
+pop this 5
+label IF_FALSE1
+push this 5
+if-goto IF_TRUE2
+goto IF_FALSE2
+label IF_TRUE2
+push this 1
+push constant 230
+lt
+if-goto IF_TRUE3
+goto IF_FALSE3
+label IF_TRUE3
+push pointer 0
+call MonsterShape.draw 1
+pop temp 0
+label IF_FALSE3
+label IF_FALSE2
+push constant 0
+return
+function MonsterShape.checkCollision 7
+push argument 0
+pop pointer 0
+push argument 1
+call Player.getX 1
+pop local 0
+push argument 1
+call Player.getY 1
+pop local 1
+push this 0
+pop local 2
+push this 1
+pop local 3
+push constant 16
+pop local 4
+push local 0
+push local 2
+push local 4
+add
+lt
+push local 0
+push local 4
+add
+push local 2
+gt
+and
+pop local 5
+push local 1
+push local 3
+push local 4
+add
+lt
+push local 1
+push local 4
+add
+push local 3
+gt
+and
+pop local 6
+push local 6
+if-goto IF_TRUE0
+goto IF_FALSE0
+label IF_TRUE0
+push local 5
+push local 6
+and
+return
+label IF_FALSE0
+push constant 0
+return

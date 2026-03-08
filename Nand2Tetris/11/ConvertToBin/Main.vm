@@ -1,0 +1,116 @@
+function Main.main 1
+push  -1
+push CONST 8001
+push CONST 16
+push CONST 1
+neg
+call .fillMemory 4
+pop TEMP 0
+push  -1
+push CONST 8000
+call .peek 2
+pop VAR 0
+push  -1
+push VAR 0
+call .convert 2
+pop TEMP 0
+push CONST 0
+return
+function Main.convert 3
+push CONST 0
+not
+pop VAR 2
+label LABEL_1_WHILE_START
+push VAR 2
+not
+if-goto LABEL_2_WHILE_END
+push VAR 1
+push CONST 1
+add
+pop VAR 1
+push  -1
+push VAR 0
+call .nextMask 2
+pop VAR 0
+push VAR 1
+push CONST 16
+gt
+not
+if-goto LABEL_3_IF_TRUE
+goto LABEL_4_IF_FALSE
+label LABEL_3_IF_TRUE
+push ARG 0
+push VAR 0
+and
+push CONST 0
+eq
+not
+if-goto LABEL_6_IF_TRUE
+goto LABEL_7_IF_FALSE
+label LABEL_6_IF_TRUE
+push  -1
+push CONST 8000
+push VAR 1
+add
+push CONST 1
+call .poke 3
+pop TEMP 0
+goto LABEL_8_IF_END
+label LABEL_7_IF_FALSE
+push  -1
+push CONST 8000
+push VAR 1
+add
+push CONST 0
+call .poke 3
+pop TEMP 0
+label LABEL_8_IF_END
+goto LABEL_5_IF_END
+label LABEL_4_IF_FALSE
+push CONST 0
+pop VAR 2
+label LABEL_5_IF_END
+goto LABEL_1_WHILE_START
+label LABEL_2_WHILE_END
+push CONST 0
+return
+function Main.nextMask 0
+push ARG 0
+push CONST 0
+eq
+if-goto LABEL_9_IF_TRUE
+goto LABEL_10_IF_FALSE
+label LABEL_9_IF_TRUE
+push CONST 1
+return
+goto LABEL_11_IF_END
+label LABEL_10_IF_FALSE
+push ARG 0
+push CONST 2
+call Math.multiply 2
+return
+label LABEL_11_IF_END
+function Main.fillMemory 0
+label LABEL_12_WHILE_START
+push ARG 1
+push CONST 0
+gt
+not
+if-goto LABEL_13_WHILE_END
+push  -1
+push ARG 0
+push ARG 2
+call .poke 3
+pop TEMP 0
+push ARG 1
+push CONST 1
+sub
+pop ARG 1
+push ARG 0
+push CONST 1
+add
+pop ARG 0
+goto LABEL_12_WHILE_START
+label LABEL_13_WHILE_END
+push CONST 0
+return

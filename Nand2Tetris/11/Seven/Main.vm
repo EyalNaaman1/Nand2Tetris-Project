@@ -1,0 +1,11 @@
+function Main.main 0
+push  None
+push CONST 1
+push CONST 2
+push CONST 3
+call Math.multiply 2
+add
+call .printInt 2
+pop TEMP 0
+push CONST 0
+return

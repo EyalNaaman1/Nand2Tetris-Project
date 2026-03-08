@@ -1,0 +1,12 @@
+function Main.main 1
+push  -1
+call .new 1
+pop VAR 0
+push VAR 0
+call squaregame.run 1
+pop TEMP 0
+push VAR 0
+call squaregame.dispose 1
+pop TEMP 0
+push CONST 0
+return

@@ -1,0 +1,154 @@
+function Main.main 4
+push  -1
+push CONST 18
+call String.new 1
+push CONST 72
+call String.appendChar 2
+push CONST 111
+call String.appendChar 2
+push CONST 119
+call String.appendChar 2
+push CONST 32
+call String.appendChar 2
+push CONST 109
+call String.appendChar 2
+push CONST 97
+call String.appendChar 2
+push CONST 110
+call String.appendChar 2
+push CONST 121
+call String.appendChar 2
+push CONST 32
+call String.appendChar 2
+push CONST 110
+call String.appendChar 2
+push CONST 117
+call String.appendChar 2
+push CONST 109
+call String.appendChar 2
+push CONST 98
+call String.appendChar 2
+push CONST 101
+call String.appendChar 2
+push CONST 114
+call String.appendChar 2
+push CONST 115
+call String.appendChar 2
+push CONST 63
+call String.appendChar 2
+push CONST 32
+call String.appendChar 2
+call .readInt 2
+pop VAR 1
+push  -1
+push VAR 1
+call .new 2
+pop VAR 0
+push CONST 0
+pop VAR 2
+label LABEL_1_WHILE_START
+push VAR 2
+push VAR 1
+lt
+not
+if-goto LABEL_2_WHILE_END
+push VAR 2
+push VAR 0
+add
+push  -1
+push CONST 16
+call String.new 1
+push CONST 69
+call String.appendChar 2
+push CONST 110
+call String.appendChar 2
+push CONST 116
+call String.appendChar 2
+push CONST 101
+call String.appendChar 2
+push CONST 114
+call String.appendChar 2
+push CONST 32
+call String.appendChar 2
+push CONST 97
+call String.appendChar 2
+push CONST 32
+call String.appendChar 2
+push CONST 110
+call String.appendChar 2
+push CONST 117
+call String.appendChar 2
+push CONST 109
+call String.appendChar 2
+push CONST 98
+call String.appendChar 2
+push CONST 101
+call String.appendChar 2
+push CONST 114
+call String.appendChar 2
+push CONST 58
+call String.appendChar 2
+push CONST 32
+call String.appendChar 2
+call .readInt 2
+pop TEMP 0
+pop POINTER 1
+push TEMP 0
+pop THAT 0
+push VAR 3
+push VAR 0
+push VAR 2
+add
+pop POINTER 1
+push THAT 0
+add
+pop VAR 3
+push VAR 2
+push CONST 1
+add
+pop VAR 2
+goto LABEL_1_WHILE_START
+label LABEL_2_WHILE_END
+push  -1
+push CONST 15
+call String.new 1
+push CONST 84
+call String.appendChar 2
+push CONST 104
+call String.appendChar 2
+push CONST 101
+call String.appendChar 2
+push CONST 32
+call String.appendChar 2
+push CONST 97
+call String.appendChar 2
+push CONST 118
+call String.appendChar 2
+push CONST 101
+call String.appendChar 2
+push CONST 114
+call String.appendChar 2
+push CONST 97
+call String.appendChar 2
+push CONST 103
+call String.appendChar 2
+push CONST 101
+call String.appendChar 2
+push CONST 32
+call String.appendChar 2
+push CONST 105
+call String.appendChar 2
+push CONST 115
+call String.appendChar 2
+push CONST 32
+call String.appendChar 2
+call .printString 2
+pop TEMP 0
+push  -1
+push VAR 3
+push VAR 1
+call Math.divide 2
+call .printInt 2
+pop TEMP 0
+push CONST 0
+return

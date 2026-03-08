@@ -1,0 +1,175 @@
+function SquareGame.new 0
+push  -1
+push CONST 0
+push CONST 0
+push CONST 30
+call .new 4
+pop FIELD 0
+push CONST 0
+pop FIELD 1
+push POINTER 0
+return
+function SquareGame.dispose 0
+push FIELD 0
+call Square.dispose 1
+pop TEMP 0
+push  -1
+push POINTER 0
+call .deAlloc 2
+pop TEMP 0
+push CONST 0
+return
+function SquareGame.moveSquare 0
+push FIELD 1
+push CONST 1
+eq
+if-goto LABEL_1_IF_TRUE
+goto LABEL_2_IF_FALSE
+label LABEL_1_IF_TRUE
+push FIELD 0
+call Square.moveUp 1
+pop TEMP 0
+label LABEL_2_IF_FALSE
+push FIELD 1
+push CONST 2
+eq
+if-goto LABEL_4_IF_TRUE
+goto LABEL_5_IF_FALSE
+label LABEL_4_IF_TRUE
+push FIELD 0
+call Square.moveDown 1
+pop TEMP 0
+label LABEL_5_IF_FALSE
+push FIELD 1
+push CONST 3
+eq
+if-goto LABEL_7_IF_TRUE
+goto LABEL_8_IF_FALSE
+label LABEL_7_IF_TRUE
+push FIELD 0
+call Square.moveLeft 1
+pop TEMP 0
+label LABEL_8_IF_FALSE
+push FIELD 1
+push CONST 4
+eq
+if-goto LABEL_10_IF_TRUE
+goto LABEL_11_IF_FALSE
+label LABEL_10_IF_TRUE
+push FIELD 0
+call Square.moveRight 1
+pop TEMP 0
+label LABEL_11_IF_FALSE
+push  -1
+push CONST 5
+call .wait 2
+pop TEMP 0
+push CONST 0
+return
+function SquareGame.run 2
+push CONST 0
+pop VAR 1
+label LABEL_13_WHILE_START
+push VAR 1
+not
+not
+if-goto LABEL_14_WHILE_END
+label LABEL_15_WHILE_START
+push VAR 0
+push CONST 0
+eq
+not
+if-goto LABEL_16_WHILE_END
+push  -1
+call .keyPressed 1
+pop VAR 0
+push POINTER 0
+call SquareGame.moveSquare 1
+pop TEMP 0
+goto LABEL_15_WHILE_START
+label LABEL_16_WHILE_END
+push VAR 0
+push CONST 81
+eq
+if-goto LABEL_17_IF_TRUE
+goto LABEL_18_IF_FALSE
+label LABEL_17_IF_TRUE
+push CONST 0
+not
+pop VAR 1
+label LABEL_18_IF_FALSE
+push VAR 0
+push CONST 90
+eq
+if-goto LABEL_20_IF_TRUE
+goto LABEL_21_IF_FALSE
+label LABEL_20_IF_TRUE
+push FIELD 0
+call Square.decSize 1
+pop TEMP 0
+label LABEL_21_IF_FALSE
+push VAR 0
+push CONST 88
+eq
+if-goto LABEL_23_IF_TRUE
+goto LABEL_24_IF_FALSE
+label LABEL_23_IF_TRUE
+push FIELD 0
+call Square.incSize 1
+pop TEMP 0
+label LABEL_24_IF_FALSE
+push VAR 0
+push CONST 131
+eq
+if-goto LABEL_26_IF_TRUE
+goto LABEL_27_IF_FALSE
+label LABEL_26_IF_TRUE
+push CONST 1
+pop FIELD 1
+label LABEL_27_IF_FALSE
+push VAR 0
+push CONST 133
+eq
+if-goto LABEL_29_IF_TRUE
+goto LABEL_30_IF_FALSE
+label LABEL_29_IF_TRUE
+push CONST 2
+pop FIELD 1
+label LABEL_30_IF_FALSE
+push VAR 0
+push CONST 130
+eq
+if-goto LABEL_32_IF_TRUE
+goto LABEL_33_IF_FALSE
+label LABEL_32_IF_TRUE
+push CONST 3
+pop FIELD 1
+label LABEL_33_IF_FALSE
+push VAR 0
+push CONST 132
+eq
+if-goto LABEL_35_IF_TRUE
+goto LABEL_36_IF_FALSE
+label LABEL_35_IF_TRUE
+push CONST 4
+pop FIELD 1
+label LABEL_36_IF_FALSE
+label LABEL_38_WHILE_START
+push VAR 0
+push CONST 0
+eq
+not
+not
+if-goto LABEL_39_WHILE_END
+push  -1
+call .keyPressed 1
+pop VAR 0
+push POINTER 0
+call SquareGame.moveSquare 1
+pop TEMP 0
+goto LABEL_38_WHILE_START
+label LABEL_39_WHILE_END
+goto LABEL_13_WHILE_START
+label LABEL_14_WHILE_END
+push CONST 0
+return

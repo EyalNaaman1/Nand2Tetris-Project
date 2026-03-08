@@ -1,0 +1,304 @@
+function Square.new 0
+push ARG 0
+pop FIELD 0
+push ARG 1
+pop FIELD 1
+push ARG 2
+pop FIELD 2
+push POINTER 0
+call Square.draw 1
+pop TEMP 0
+push POINTER 0
+return
+function Square.dispose 0
+push  -1
+push POINTER 0
+call .deAlloc 2
+pop TEMP 0
+push CONST 0
+return
+function Square.draw 0
+push  -1
+push CONST 0
+not
+call .setColor 2
+pop TEMP 0
+push  -1
+push FIELD 0
+push FIELD 1
+push FIELD 0
+push FIELD 2
+add
+push FIELD 1
+push FIELD 2
+add
+call .drawRectangle 5
+pop TEMP 0
+push CONST 0
+return
+function Square.erase 0
+push  -1
+push CONST 0
+call .setColor 2
+pop TEMP 0
+push  -1
+push FIELD 0
+push FIELD 1
+push FIELD 0
+push FIELD 2
+add
+push FIELD 1
+push FIELD 2
+add
+call .drawRectangle 5
+pop TEMP 0
+push CONST 0
+return
+function Square.incSize 0
+push FIELD 1
+push FIELD 2
+add
+push CONST 254
+lt
+push FIELD 0
+push FIELD 2
+add
+push CONST 510
+lt
+and
+if-goto LABEL_1_IF_TRUE
+goto LABEL_2_IF_FALSE
+label LABEL_1_IF_TRUE
+push POINTER 0
+call Square.erase 1
+pop TEMP 0
+push FIELD 2
+push CONST 2
+add
+pop FIELD 2
+push POINTER 0
+call Square.draw 1
+pop TEMP 0
+label LABEL_2_IF_FALSE
+push CONST 0
+return
+function Square.decSize 0
+push FIELD 2
+push CONST 2
+gt
+if-goto LABEL_4_IF_TRUE
+goto LABEL_5_IF_FALSE
+label LABEL_4_IF_TRUE
+push POINTER 0
+call Square.erase 1
+pop TEMP 0
+push FIELD 2
+push CONST 2
+sub
+pop FIELD 2
+push POINTER 0
+call Square.draw 1
+pop TEMP 0
+label LABEL_5_IF_FALSE
+push CONST 0
+return
+function Square.moveUp 0
+push FIELD 1
+push CONST 1
+gt
+if-goto LABEL_7_IF_TRUE
+goto LABEL_8_IF_FALSE
+label LABEL_7_IF_TRUE
+push  -1
+push CONST 0
+call .setColor 2
+pop TEMP 0
+push  -1
+push FIELD 0
+push FIELD 1
+push FIELD 2
+add
+push CONST 1
+sub
+push FIELD 0
+push FIELD 2
+add
+push FIELD 1
+push FIELD 2
+add
+call .drawRectangle 5
+pop TEMP 0
+push FIELD 1
+push CONST 2
+sub
+pop FIELD 1
+push  -1
+push CONST 0
+not
+call .setColor 2
+pop TEMP 0
+push  -1
+push FIELD 0
+push FIELD 1
+push FIELD 0
+push FIELD 2
+add
+push FIELD 1
+push CONST 1
+add
+call .drawRectangle 5
+pop TEMP 0
+label LABEL_8_IF_FALSE
+push CONST 0
+return
+function Square.moveDown 0
+push FIELD 1
+push FIELD 2
+add
+push CONST 254
+lt
+if-goto LABEL_10_IF_TRUE
+goto LABEL_11_IF_FALSE
+label LABEL_10_IF_TRUE
+push  -1
+push CONST 0
+call .setColor 2
+pop TEMP 0
+push  -1
+push FIELD 0
+push FIELD 1
+push FIELD 0
+push FIELD 2
+add
+push FIELD 1
+push CONST 1
+add
+call .drawRectangle 5
+pop TEMP 0
+push FIELD 1
+push CONST 2
+add
+pop FIELD 1
+push  -1
+push CONST 0
+not
+call .setColor 2
+pop TEMP 0
+push  -1
+push FIELD 0
+push FIELD 1
+push FIELD 2
+add
+push CONST 1
+sub
+push FIELD 0
+push FIELD 2
+add
+push FIELD 1
+push FIELD 2
+add
+call .drawRectangle 5
+pop TEMP 0
+label LABEL_11_IF_FALSE
+push CONST 0
+return
+function Square.moveLeft 0
+push FIELD 0
+push CONST 1
+gt
+if-goto LABEL_13_IF_TRUE
+goto LABEL_14_IF_FALSE
+label LABEL_13_IF_TRUE
+push  -1
+push CONST 0
+call .setColor 2
+pop TEMP 0
+push  -1
+push FIELD 0
+push FIELD 2
+add
+push CONST 1
+sub
+push FIELD 1
+push FIELD 0
+push FIELD 2
+add
+push FIELD 1
+push FIELD 2
+add
+call .drawRectangle 5
+pop TEMP 0
+push FIELD 0
+push CONST 2
+sub
+pop FIELD 0
+push  -1
+push CONST 0
+not
+call .setColor 2
+pop TEMP 0
+push  -1
+push FIELD 0
+push FIELD 1
+push FIELD 0
+push CONST 1
+add
+push FIELD 1
+push FIELD 2
+add
+call .drawRectangle 5
+pop TEMP 0
+label LABEL_14_IF_FALSE
+push CONST 0
+return
+function Square.moveRight 0
+push FIELD 0
+push FIELD 2
+add
+push CONST 510
+lt
+if-goto LABEL_16_IF_TRUE
+goto LABEL_17_IF_FALSE
+label LABEL_16_IF_TRUE
+push  -1
+push CONST 0
+call .setColor 2
+pop TEMP 0
+push  -1
+push FIELD 0
+push FIELD 1
+push FIELD 0
+push CONST 1
+add
+push FIELD 1
+push FIELD 2
+add
+call .drawRectangle 5
+pop TEMP 0
+push FIELD 0
+push CONST 2
+add
+pop FIELD 0
+push  -1
+push CONST 0
+not
+call .setColor 2
+pop TEMP 0
+push  -1
+push FIELD 0
+push FIELD 2
+add
+push CONST 1
+sub
+push FIELD 1
+push FIELD 0
+push FIELD 2
+add
+push FIELD 1
+push FIELD 2
+add
+call .drawRectangle 5
+pop TEMP 0
+label LABEL_17_IF_FALSE
+push CONST 0
+return
